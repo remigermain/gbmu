@@ -84,10 +84,14 @@ $(DOBJ)%.o : $(DSRC)%.c $(CHEADER) $(LIBFT)
 clean: print_name
 	@rm -rf $(DOBJ)
 	@echo $(SPACE)"Deleting ${ESC}[1;31mobjects${ESC}[0m"
+	@make -C libft/ clean
 
-fclean: clean
+fclean: print_name
 	@rm -f $(NAME)
+	@rm -rf $(DOBJ)
 	@echo $(SPACE)"Deleting ${ESC}[1;31m"$(NAME) "${ESC}[0m"
+	@echo $(SPACE)"Deleting ${ESC}[1;31mobjects${ESC}[0m"
+	@make -C libft/ fclean
 
 
 re: print_name
