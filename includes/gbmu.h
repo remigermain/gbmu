@@ -1,16 +1,70 @@
 #ifndef GBMU_H
 # define GBMU_H
+# include <fcntl.h>
 # include "libft.h"
 # include "gbmu_enum.h"
 # define STACK_MEM  0xFFFF
 
-typedef struct   s_process
+
+struct s_rom
 {
-    unsigned char reg[5];
-}               t_process;
+    unsigned char   unk[256];
+    unsigned short  magic;
+    unsigned short  start_add;
+    unsigned char   data[48];
+    unsigned char   title[11];
+    unsigned int    game_code;
+    unsigned char   support_code;
+    unsigned short  maker_code;
+    unsigned char   sgb_support_code;
+    unsigned char   cassette_type;
+    unsigned char   rom_size;
+    unsigned char   ram_size;
+    unsigned char   destination;
+    unsigned char   type33;
+    unsigned char   mask_rom_version;
+    unsigned char   complement_check;
+    unsigned short  checksum;
+}__attribute__((packed));
+
+typedef struct s_rom t_rom;
 
 typedef struct s_gbmu
 {
+    t_rom          rom;
+    unsigned char   reg[8];
+    unsigned        pc : 16;
+    unsigned        sp : 16;
     unsigned char   area[STACK_MEM];
 }               t_gbmu;
+/*
+**-------------------------------------------------------
+**          read_rom.c
+**-------------------------------------------------------
+*/
+void    read_rom(t_gbmu *st);
+
+/*
+**-------------------------------------------------------
+**          modifier_register.c
+**-------------------------------------------------------
+*/
+void    set_register_flag(t_gbmu *st, int result, enum e_mod_flag mod);
+
+/*
+**-------------------------------------------------------
+**          utils.c
+**-------------------------------------------------------
+*/
+void    gbmu_error(t_gbmu *st, char *str);
+void    reverse_byts(unsigned char *byts, int size);
+
+/*
+**-------------------------------------------------------
+**         deubg.c
+**-------------------------------------------------------
+*/
+void    rom_information(t_gbmu *st);
+void    print_memory(unsigned char *mem, int size);
+
 #endif

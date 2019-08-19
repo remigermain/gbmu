@@ -45,7 +45,7 @@ CHEADER = $(addprefix $(DHEADER),$(HEADER))
 # 								ALL  SCRS									   #
 # *****************************************************************************#
 
-SRC =	main.c
+SRC =	main.c read_rom.c modifier_register.c utils.c debug.c
 
 COUNT = "1"
 SPACE = "                    "

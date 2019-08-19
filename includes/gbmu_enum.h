@@ -226,10 +226,19 @@ enum e_lcd_common
     LCDC_CONTROLLER = 0b10000000,
 
     STAT_ADD = 0xFF41,
-    STAT_MODE,
+    STAT_MODE_FLAG = 0b11,
+    STAT_MATCH_FLAG = 0b100,
+    STAT_INTERRUPT = 0b1111000,
 
     SCY_ADD = 0xFF42,
     SCX_ADD = 0xFF43,
+
+    LY_ADD = 0xFF44,
+    LYC_ADD = 0xFF45,
+
+    WY_ADD = 0xFF4A,
+    WX_ADD = 0xFF4B,
+
 };
 
 enum e_lcd_dmg
@@ -248,8 +257,303 @@ enum e_lcd_cgb
     VBK_PRIORITY_FLAG = 0b10000000,
 };
 
+/*
+**--------------------------------
+**           OAM Register
+**--------------------------------
+*/
+
+enum e_oam_register
+{
+    OBJO_LCD_Y_ADD = 0xFE00,
+    OBJO_LCD_X_ADD = 0xFE01,
+    OBJO_CHR_CODE_ADD = 0xFE02,
+    OBJO_ATTRIBUTE_FLAG = 0xFE03,
+};
+
+/*
+**-------------------------------------------------------
+**          DMA Registers
+**-------------------------------------------------------
+*/
+
+/*
+**--------------------------------
+**         DMA Transfers in DMG
+**--------------------------------
+*/
+
+enum e_dma_transfers_dmg
+{
+    EMPTY,
+};
+
+enum e_dma_control_register_cgb
+{
+    HDMA5_ADD = 0XFF55,
+};
+
+enum e_dma_transfers_common
+{
+    DMA_ADD = 0xFF46,   
+};
+
+/*
+**-------------------------------------------------------
+**          LCD COLOR DISPLAY (CGB ONLY)
+**-------------------------------------------------------
+*/
+
+/*
+**--------------------------------
+**         Color Palettes
+**--------------------------------
+*/
+
+enum e_color_palette
+{
+    COLOR_PALETTE_L = 0b11111111,
+    COLOR_PALETTE_H = 0b11111111,
+    RED_COLOR_ADD = 0b11111,
+    GREEN_COLOR_ADD = 0b1111100000,
+    BLUE_COLOR_ADD = 0b111110000000000,
+};
+
+/*
+**--------------------------------
+**           Writing Data to a Color Palette
+**--------------------------------
+*/
+
+enum e_write_color_palette
+{
+    BCPS_ADD = 0xFF68,
+    BCPD_ADD = 0xFF69,
+    OCPS_ADD = 0xFF6A,
+    OCPD_ADD = 0xFF6B,
+};
+
+/*
+**-------------------------------------------------------
+**          SOUND FUNCTIONS
+**-------------------------------------------------------
+*/
+
+/*
+**-------------------------------------------------------
+**          SOUND CONTROL REGISTERS
+**-------------------------------------------------------
+*/
+
+/*
+**--------------------------------
+**         Sound 1 Mode Registers
+**--------------------------------
+*/
+
+enum e_sound1_mode_reg
+{
+    NR10_ADD = 0xFF10,
+    NR11_ADD = 0xFF11,
+    NR12_ADD = 0xFF12,
+    NR13_ADD = 0xFF13,
+    NR14_ADD = 0xFF14,
+};
+
+/*
+**--------------------------------
+**         Sound 2 Mode Registers
+**--------------------------------
+*/
+
+enum e_soud2_mode_reg
+{
+    NR21_ADD = 0xFF16,
+    NR22_ADD = 0xFF17,
+    NR23_ADD = 0xFF18,
+    NR24_ADD = 0xFF19,
+};
+
+/*
+**--------------------------------
+**         Sound 3 Mode Registers
+**--------------------------------
+*/
+
+enum e_soud3_mode_reg
+{
+    NR30_ADD = 0xFF1A,
+    NR31_ADD = 0xFF1B,
+    NR32_ADD = 0xFF1C,
+    NR33_ADD = 0xFF1D,
+    NR34_ADD = 0xFF1E,
+};
+
+/*
+**--------------------------------
+**          Sound 4 Mode Registers
+**--------------------------------
+*/
+
+enum e_soud4_mode_reg
+{
+    NR41_ADD = 0xFF20,
+    NR42_ADD = 0xFF21,
+    NR43_ADD = 0xFF22,
+    NR44_ADD = 0xFF23,
+};
+
+/*
+**--------------------------------
+**          Sound Control Registers
+**--------------------------------
+*/
+
+enum e_sound_control_reg
+{
+    NR50_ADD = 0xFF24,
+    NR51_ADD = 0xFF25,
+    NR52_ADD = 0xFF26,
+};
+
+/*
+**-------------------------------------------------------
+**          CPU INSTRUCTION SET
+**-------------------------------------------------------
+*/
+
+enum e_register
+{
+  REG_A = 0,
+  REG_B,
+  REG_C,
+  REG_D,
+  REG_E,
+  REG_F,
+  REG_G,
+  REG_H,
+};
+
+enum e_mod_flag
+{
+    FLAG_Z,
+    FLAG_N,
+    FLAG_H,
+    FLAG_CY,
+};
+
+/*
+**-------------------------------------------------------
+**          SYSTEM COMMANDS
+**-------------------------------------------------------
+*/
+
+enum e_sys_cmd
+{
+    PAL01 = 0x00,
+    PAL23 = 0x01,
+    PAL03 = 0x02,
+    PAL12 = 0x03,
+    ATTR_BLK = 0x04,
+    ATTR_LIN = 0x05,
+    ATTR_DIV = 0x06,
+    ATTR_CHR = 0x07,
+    SOUND = 0x08,
+    SOU_TRN = 0x9,
+    PAL_SET = 0x0A,
+    PAL_TRN = 0x0B,
+    ATRC_EN = 0x0C,
+    ICON_EN = 0x0E,
+    PROHIBITED_1 = 0x0D,
+    DATA_SND = 0x0F,
+    DATA_TRN = 10,
+    MLT_REQ = 11,
+    JUMP = 12,
+    CHR_TRN = 13,
+    PCT_TRN = 14,
+    ATTR_TRN = 15,
+    ATTR_SET = 16,
+    MASK_EN = 17,
+    PROHIBITED_2 = 18,
+    PAL_PRI = 19,
+};
+
+/*
+**-------------------------------------------------------
+**          Sound Effect
+**-------------------------------------------------------
+*/
+
+enum e_effect_a_flags
+{
+
+    JUMP_SOUND = 0x17,
+    FAST_JUMO = 0x18,
+    JET_FIRING = 0x19,
+    JET_LANDING = 0x1A,
+    CUP_BREAKING = 0x1B,
+    GLASS_BREAKING = 0x1C,
+    LEVEL_UP = 0x1D,
+    AIR_INJECTION = 0x1E,
+    SWORD_WIELDING = 0x1F,
+    FAILLING_IN_WATER = 0x20,
+    FIRE_A = 0x21,
+    BREAKING_WALL = 0x22,
+    CANCELLATION_SOUND = 0x23,
+    STEPPING = 0x24,
+    BLOCK_HITTING_SOUND = 0x25,
+    SOUND_PICTURE_FLOATING_VIEW = 0x26,
+    SCREEN_FADE_IN = 0x27,
+    SCREEN_FADE_OUT = 0x28,
+    WINDOW_OPENING = 0x29,
+    WINDOW_CLOSING = 0x2A,
+    LARGE_LASER_SOUND = 0x2B,
+    SOUND_STRONE_DOOR_CLOSING = 0x2C,
+    TELEPORTATION = 0x2D,
+    THUNDER_A = 0x2E,
+    EARTHQUAKE_A = 0x2F,
+    SMALL_LASER_SOUND = 0x30,
 
 
 
+};
+
+enum e_effect_b_flags
+{
+    DUMMY_FLAG_RETRIGGERING = 0x00,
+    SOUND_EFFECT_B_STOP = 0x80,
+    APPLAUSE_SMALL = 0x01,
+    APPLAUSE_MEDIUM = 0x02,
+    APPLAUSE_LARGE = 0x03,
+    WIND = 0x04,
+    RAIN = 0x05,
+    STORM = 0x06,
+    HURRICANE = 0x07,
+    THUNDER_B = 0x08,
+    EARTHQUAKE_B = 0x09,
+    LAVAL_FLOW = 0x0A,
+    WAVE = 0x0B,
+    RIVER = 0x0C,
+    WATERFALL = 0x0D,
+    SMALL_CHARACTER_RUNNING = 0x0E,
+    HORSE_GALLOPING = 0x0F,
+    WARNING_SOUND = 0x10,
+    FUTURISTIC_CAR_RUNNING = 0x11,
+    JET_FLYING = 0x12,
+    UFO_FLYING = 0x13,
+    ELECTROMAGNETIC_WAVES = 0x14,
+    SOUND_SCORE_RAISED = 0x15,
+    FIRE = 0x16,
+    CAMERA_SHUTTER_FORMANT = 0x17,
+    WRITING_FORMANT = 0x18,
+    ERASING_FORMANT = 0x19,
+};
+
+
+/*
+**-------------------------------------------------------
+**          Sound Effect
+**-------------------------------------------------------
+*/
 
 #endif
