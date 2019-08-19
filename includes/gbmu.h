@@ -4,9 +4,15 @@
 # include "libft.h"
 # include "gbmu_enum.h"
 # define STACK_MEM  0xFFFF
+# define TAB_ASCII " !\"#$%&\'()*+,-./.0123456789:<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[|]^_"
 
+/*
+**-------------------------------------------------------
+**          header from rom
+**-------------------------------------------------------
+*/
 
-struct s_rom
+struct s_rom_header
 {
     unsigned char   unk[256];
     unsigned short  magic;
@@ -27,11 +33,11 @@ struct s_rom
     unsigned short  checksum;
 }__attribute__((packed));
 
-typedef struct s_rom t_rom;
+typedef struct s_rom_header t_rom_header;
 
 typedef struct s_gbmu
 {
-    t_rom          rom;
+    t_rom_header    rom;
     unsigned char   reg[8];
     unsigned        pc : 16;
     unsigned        sp : 16;

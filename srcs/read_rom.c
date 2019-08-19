@@ -7,6 +7,7 @@ void    reverse_rom(t_gbmu *st)
     reverse_byts((unsigned char *)&st->rom.maker_code, sizeof(st->rom.maker_code));
     reverse_byts((unsigned char *)&st->rom.magic, sizeof(st->rom.magic));
     reverse_byts((unsigned char *)&st->rom.checksum, sizeof(st->rom.checksum));
+    reverse_byts((unsigned char *)&st->rom.game_code, sizeof(st->rom.game_code));
 }
 
 void    read_rom(t_gbmu *st)
@@ -21,10 +22,10 @@ void    read_rom(t_gbmu *st)
         name = get_flags_av(FLAG_ARGV, 0);
     if ((fd = open(name, O_RDONLY)) > 0)
     {
-        if (read(fd, &(st->rom), sizeof(t_rom)) != sizeof(t_rom))
+        if (read(fd, &(st->rom), sizeof(t_rom_header)) != sizeof(t_rom_header))
             gbmu_error(st, "header of rom is not good !");
         reverse_rom(st);
-        print_memory(&st->rom, sizeof(t_rom));
+        print_memory(&st->rom, sizeof(t_rom_header));
         if (exist_flags('i'))
             rom_information(st);
         close(fd);

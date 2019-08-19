@@ -549,11 +549,47 @@ enum e_effect_b_flags
     ERASING_FORMANT = 0x19,
 };
 
-
 /*
 **-------------------------------------------------------
-**          Sound Effect
+**          ROM support code 0143H
 **-------------------------------------------------------
 */
+
+enum e_rom_support_code
+{
+    CGB_INCOMPATIBLE = 0x00,
+    CGB_COMPATIBLE = 0x80,
+    CGB_EXCLUSIVE = 0xC0,
+    GB_SUPPORT_CODE = 0x00,
+    SGB_SUPPORT_CODE = 0x03,
+};
+
+enum e_room_size
+{
+    ROM_SIZE_256K = 0x00,
+    ROM_SIZE_512K = 0x01,
+    ROM_SIZE_1M = 0x02,
+    ROM_SIZE_2M = 0x03,
+    ROM_SIZE_4M = 0x04,
+    ROM_SIZE_8M = 0x05,
+    ROM_SIZE_16M = 0x06,
+    ROM_SIZE_32M = 0x07,
+    ROM_SIZE_64M = 0x08,
+
+};
+
+enum e_rom_ram_size
+{
+    ROM_RAM_SIZE_MBC2 = 0x00,
+    ROM_RAM_SIZE_64K = 0x02,
+    ROM_RAM_SIZE_256K = 0x03,
+    ROM_RAM_SIZE_1M = 0x04,
+};
+
+enum e_rom_destination_code
+{
+    ROM_DES_CODE_JAPAN = 0x00,
+    ROM_DES_CODE_OTHER = 0x01,
+};
 
 #endif
