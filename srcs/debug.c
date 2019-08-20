@@ -95,19 +95,3 @@ void    rom_information(t_gbmu *st)
     ft_printf("checksum : ");
     print_type(&st->rom.checksum, sizeof(st->rom.checksum));
 }
-
-void    print_memory(unsigned char *mem, int size)
-{
-    int i;
-
-    i = -1;
-    while (++i < size)
-    {
-        if (i % 16 == 0)
-            ft_printf("\n0x%.6x ", i);
-        if (i % 8 == 0 && i % 16)
-            ft_printf(" ");
-        ft_printf("%hh.2x ", mem[i]);
-    }
-    ft_printf("\n");
-}

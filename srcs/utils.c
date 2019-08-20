@@ -7,16 +7,3 @@ void    gbmu_error(t_gbmu *st, char *str)
     exit(EXIT_FAILURE);
 }
 
-void    reverse_byts(unsigned char *byts, int size)
-{
-    unsigned char   tmp;
-    int             mem;
-
-    mem = size;
-    while (size-- > mem / 2)
-    {
-        tmp = byts[size];
-        byts[size] = byts[mem - size];
-        byts[mem - size] = tmp;
-    }
-}

@@ -63,7 +63,6 @@ void    set_register_flag(t_gbmu *st, int result, enum e_mod_flag mod);
 **-------------------------------------------------------
 */
 void    gbmu_error(t_gbmu *st, char *str);
-void    reverse_byts(unsigned char *byts, int size);
 
 /*
 **-------------------------------------------------------
@@ -71,6 +70,5 @@ void    reverse_byts(unsigned char *byts, int size);
 **-------------------------------------------------------
 */
 void    rom_information(t_gbmu *st);
-void    print_memory(unsigned char *mem, int size);
 
 #endif
